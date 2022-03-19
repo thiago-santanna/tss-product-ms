@@ -12,7 +12,7 @@
 	<artifactId>product-ms</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>product-ms</name>
-	<description>Catálogo de produtos</description>
+	<description>Catalogo de produtos</description>
 	<properties>
 		<java.version>11</java.version>
 	</properties>
