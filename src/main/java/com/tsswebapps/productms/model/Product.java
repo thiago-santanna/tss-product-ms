@@ -10,6 +10,8 @@ import javax.persistence.Id;
 
 import org.springframework.format.annotation.NumberFormat;
 
+import com.tsswebapps.productms.dto.ProductDto;
+
 @Entity
 public class Product {
 	
@@ -47,6 +49,10 @@ public class Product {
 		this.name = name;
 		this.description = description;
 		this.price = price;
+	}
+
+	public ProductDto toDto() {
+		return new ProductDto(this.id.toString(), this.name, this.description, this.price);
 	}
 	
 }

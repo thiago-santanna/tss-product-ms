@@ -2,6 +2,8 @@ package com.tsswebapps.productms.dto;
 
 import java.math.BigDecimal;
 
+import com.tsswebapps.productms.model.Product;
+
 public class ProductDto {
 
 	private String id;
@@ -30,6 +32,10 @@ public class ProductDto {
 		this.name = name;
 		this.description = description;
 		this.price = price;
+	}
+
+	public Product toProduct() {
+		return new Product(this.name, this.description, this.price);
 	}
 
 }
