@@ -68,7 +68,7 @@ public class ProductController {
 	public ResponseEntity<List<ProductDto>> allProducts(){	
 		List<ProductDto> all = findAllProducts.execute();
 		
-		return new ResponseEntity<List<ProductDto>>(all, HttpStatus.OK);
+		return new ResponseEntity<>(all, HttpStatus.OK);
 	}
 	
 
