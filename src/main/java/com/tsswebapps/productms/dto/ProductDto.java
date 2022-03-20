@@ -2,13 +2,32 @@ package com.tsswebapps.productms.dto;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.NotFound;
+
 import com.tsswebapps.productms.model.Product;
 
 public class ProductDto {
-
+    
 	private String id;
+	
+	@NotEmpty
+	@NotBlank
+	@NotFound
 	private String name;
+	
+	@NotEmpty
+	@NotBlank
+	@NotFound
 	private String description;
+	
+	@NotNull
+	@NotFound
+	@Min(0)
 	private BigDecimal price;
 
 	public String getId() {
@@ -38,4 +57,11 @@ public class ProductDto {
 		return new Product(this.name, this.description, this.price);
 	}
 
+	public Product copyToProduct(Product actualProduct) {
+		actualProduct.setName(this.name);
+		actualProduct.setDescription(this.description);
+		actualProduct.setPrice(this.price);
+		return actualProduct;
+	}
+	
 }

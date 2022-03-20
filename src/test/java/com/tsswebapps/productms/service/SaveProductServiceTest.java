@@ -19,7 +19,7 @@ public class SaveProductServiceTest {
 	@Test
 	void DeveriaSalvarProdutoComTodosOsCamposInformados() {
 		ProductDto productRequest = new ProductDto(null, "Nome Produto", "Descricao do produto", new BigDecimal(1));
-		ProductDto productSaved = service.execute(productRequest.toProduct());
+		ProductDto productSaved = service.execute(false, productRequest.toProduct());
 		assertNotNull(productSaved);
 	}
 }

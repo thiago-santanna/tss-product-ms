@@ -22,6 +22,18 @@ public class Product {
 	@Column(nullable = false)
 	private String name;
 	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPrice(BigDecimal price) {
+		this.price = price;
+	}
+
 	@Column(nullable = false)
 	private String description;
 	
@@ -45,6 +57,8 @@ public class Product {
 		return price;
 	}
 
+	public Product() {}
+	
 	public Product(String name, String description, BigDecimal price) {
 		this.name = name;
 		this.description = description;
