@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tsswebapps.productms.dto.ProductDto;
 import com.tsswebapps.productms.model.Product;
+import com.tsswebapps.productms.service.FindAllProducts;
 import com.tsswebapps.productms.service.FindOneProductId;
 import com.tsswebapps.productms.service.SaveProductService;
 
@@ -31,6 +32,9 @@ public class ProductController {
 	
 	@Autowired
 	private FindOneProductId findOneProductId;
+	
+	@Autowired
+	private FindAllProducts findAllProducts;
 	
 
 	@PostMapping
@@ -60,8 +64,11 @@ public class ProductController {
 		return new ResponseEntity<>(findedProduct.toDto(), HttpStatus.OK);
 	}
 	
-	public ResponseEntity<List<ProductDto>> allProducts(@PathVariable UUID id){	
-		return null;
+	@GetMapping()
+	public ResponseEntity<List<ProductDto>> allProducts(){	
+		List<ProductDto> all = findAllProducts.execute();
+		
+		return new ResponseEntity<List<ProductDto>>(all, HttpStatus.OK);
 	}
 	
 
