@@ -15,6 +15,7 @@ public class SaveProductService {
 	private ProductRepository repository;	
 	
 	public ProductDto execute(boolean hasErrors, Product product) {
+		
 		if (hasErrors) {
 			throw new BadRequestException("Dados inválidos");
 		}

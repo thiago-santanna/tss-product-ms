@@ -31,20 +31,11 @@ public interface ProductRepository extends JpaRepository<Product, UUID>, AsimioJ
 				StringBuilder builder = new StringBuilder();
 				// Query Native
 				builder.append("SELECT * FROM PRODUCT ");
-				
 				builder.append("WHERE 1 = 1 ");
-				
-				if (queryParams.get("minPrice") != null) {
-					builder.append("  AND price >= :minPrice");
-				}
-				
-				if (queryParams.get("maxPrice") != null) {
-					builder.append("  AND price <= :maxPrice");
-				}
-				
-				if (queryParams.get("queryNameDescription") != null) {
-						builder.append(" AND ( (name like :name) or (description  like :description) )");
-				}	
+				builder.append((queryParams.get("minPrice") != null) ? "  AND price >= :minPrice" : "");
+				builder.append((queryParams.get("maxPrice") != null) ? "  AND price <= :maxPrice" : "");
+				builder.append((queryParams.get("queryNameDescription") != null)
+						? " AND ( (name like :name) or (description  like :description) )" : "");
 
 				// Parameters
 				String nativeQuery = builder.toString();
@@ -53,30 +44,25 @@ public interface ProductRepository extends JpaRepository<Product, UUID>, AsimioJ
 				if (queryParams.get("minPrice") != null) {
 					query.setParameter("minPrice", queryParams.get("minPrice"));
 				}
-				
 				if (queryParams.get("maxPrice") != null) {
 					query.setParameter("maxPrice", queryParams.get("maxPrice"));
 				}
-				
 				if (queryParams.get("queryNameDescription") != null) {
-					query.setParameter("name", "%"+queryParams.get("queryNameDescription")+"%");
-					query.setParameter("description", "%"+queryParams.get("queryNameDescription")+"%");
+					query.setParameter("name", "%" + queryParams.get("queryNameDescription") + "%");
+					query.setParameter("description", "%" + queryParams.get("queryNameDescription") + "%");
 				}
-
 				return query.getResultList();
 			}
 
 			private Map<String, Object> buildQueryParameters() {
 				Map<String, Object> result = new HashMap<>();
-				
-				if (!ObjectUtils.isEmpty(criteria.getMinPrice()))  {
+
+				if (!ObjectUtils.isEmpty(criteria.getMinPrice())) {
 					result.put("minPrice", criteria.getMinPrice());
 				}
-				
-				if (!ObjectUtils.isEmpty(criteria.getMaxPrice()))  {
+				if (!ObjectUtils.isEmpty(criteria.getMaxPrice())) {
 					result.put("maxPrice", criteria.getMaxPrice());
 				}
-				
 				if (!ObjectUtils.isEmpty(criteria.getQ())) {
 					result.put("queryNameDescription", criteria.getQ());
 				}
