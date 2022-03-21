@@ -11,7 +11,7 @@ import com.tsswebapps.productms.model.Product;
 import com.tsswebapps.productms.repository.ProductRepository;
 
 @Service
-public class FindOneProductId {
+public class FindOneProductIdService {
 	@Autowired
 	private ProductRepository repository;
 

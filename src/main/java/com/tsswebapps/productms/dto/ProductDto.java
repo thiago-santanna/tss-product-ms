@@ -54,7 +54,7 @@ public class ProductDto {
 	}
 
 	public Product toProduct() {
-		return new Product(this.name, this.description, this.price);
+		return new Product(null, this.name, this.description, this.price);
 	}
 
 	public Product copyToProduct(Product actualProduct) {
