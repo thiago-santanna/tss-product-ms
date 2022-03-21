@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tsswebapps.productms.dto.ProductDto;
 import com.tsswebapps.productms.model.Product;
+import com.tsswebapps.productms.service.DeleteProductService;
 import com.tsswebapps.productms.service.FindAllProductsService;
 import com.tsswebapps.productms.service.FindOneProductIdService;
 import com.tsswebapps.productms.service.FindProductsParametersService;
@@ -41,6 +43,9 @@ public class ProductController {
 	
 	@Autowired
 	private FindProductsParametersService findProductsParametersService;
+	
+	@Autowired
+	private DeleteProductService deleteProductService;
 	
 
 	@PostMapping
@@ -86,6 +91,14 @@ public class ProductController {
 		List<ProductDto> products = findProductsParametersService.execute(q, min_price, max_price);
 				
 		return new ResponseEntity<List<ProductDto>>(products, HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/{id}")
+	public ResponseEntity<Void> updateProduct(@PathVariable UUID id) {
+		
+		Product actualProduct = findOneProductIdService.execute(id);
+		deleteProductService.execute(actualProduct);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 
